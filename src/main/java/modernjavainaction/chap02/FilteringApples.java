@@ -1,5 +1,7 @@
 package modernjavainaction.chap02;
 
+import scala.App;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +42,14 @@ public class FilteringApples {
       }
     });
     System.out.println(redApples2);
+
+    /**
+     * Quiz_02_1
+     */
+    System.out.println("AppleFancyFormatter :");
+    prettyPrintApple(inventory, new AppleFancyFormatter());
+    System.out.println("AppleSimpleFormatter :");
+    prettyPrintApple(inventory, new AppleSimpleFormatter());
   }
 
   public static List<Apple> filterGreenApples(List<Apple> inventory) {
@@ -152,6 +162,40 @@ public class FilteringApples {
       return apple.getColor() == Color.RED && apple.getWeight() > 150;
     }
 
+  }
+
+
+  /**
+   * Quiz_02_1
+   * prettyPrintApple
+   */
+
+  public static void prettyPrintApple(List<Apple> inventory, AppleFormatter f){
+    for (Apple apple : inventory) {
+      String output = f.accept(apple);
+      System.out.println(output);
+    }
+  }
+
+  interface AppleFormatter{
+    String accept(Apple apple);
+  }
+
+  static class AppleFancyFormatter implements AppleFormatter{
+
+    @Override
+    public String accept(Apple apple) {
+      String characteristic = apple.getWeight() > 150 ? "heavy" : "light";
+      return "A " + characteristic + " " + apple.getColor() + " apple";
+    }
+  }
+
+  static class AppleSimpleFormatter implements AppleFormatter {
+
+    @Override
+    public String accept(Apple apple) {
+      return "A apple " +apple.getWeight() + "g";
+    }
   }
 
 }
