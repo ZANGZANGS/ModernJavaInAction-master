@@ -60,6 +60,13 @@ public class NumericStreams {
         .map(array -> Arrays.stream(array).mapToInt(a -> (int) a).toArray());
     System.out.println("pythagoreanTriples2 >>>");
     pythagoreanTriples2.limit(5).forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2]));
+
+    //QUIZ 5-4
+    System.out.println("QUIZ 5-4 >>>");
+    Stream.iterate(new int[]{0, 1},
+                    v -> new int[]{v[1], v[0] + v[1]})
+            .limit(20)
+            .forEach(f -> System.out.println("(" + f[0] + ", " + f[1] + ")"));
   }
 
   public static boolean isPerfectSquare(int n) {
